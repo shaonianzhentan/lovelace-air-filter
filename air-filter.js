@@ -7026,7 +7026,7 @@ class AirFilter extends HTMLElement {
     }
     // 自动模式
     activeElement = this.content.querySelector('.var-auto')
-    if (state.state === 'on') {
+    if (attrs['mode'] == 'auto') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
       }
@@ -7035,7 +7035,7 @@ class AirFilter extends HTMLElement {
     }
     // 睡眠模式
     activeElement = this.content.querySelector('.var-silent')
-    if (state.state === 'on') {
+    if (attrs['mode'] == 'silent') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
       }
@@ -7044,7 +7044,7 @@ class AirFilter extends HTMLElement {
     }
     // 最爱模式
     activeElement = this.content.querySelector('.var-favorite')
-    if (state.state === 'on') {
+    if (attrs['mode'] == 'favorite') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
       }
