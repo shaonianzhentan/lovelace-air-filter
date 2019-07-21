@@ -6982,7 +6982,7 @@ class AirFilter extends HTMLElement {
                 开关
               </button>
           </div>
-          <div class="op  var-auto ${attrs['mode'] == 'auto' ? 'active' : ''}">
+          <div class="op var-auto ${attrs['mode'] == 'auto' ? 'active' : ''}">
               <button>
               <span class="icon-waper">
                 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-auto"></use></svg>
@@ -6990,7 +6990,7 @@ class AirFilter extends HTMLElement {
                 自动
               </button>
           </div>
-          <div class="op">
+          <div class="op var-silent ${attrs['mode'] == 'silent' ? 'active' : ''}">
               <button>
               <span class="icon-waper">
               <svg class="icon" aria-hidden="true"><use xlink:href="#icon-moon"></use></svg>
@@ -6998,7 +6998,7 @@ class AirFilter extends HTMLElement {
                 睡眠
               </button>
           </div>
-          <div class="op">
+          <div class="op var-favorite ${attrs['mode'] == 'favorite' ? 'active' : ''}">
               <button>
               <span class="icon-waper">
               <svg class="icon" aria-hidden="true"><use xlink:href="#icon-love"></use></svg>
@@ -7024,8 +7024,26 @@ class AirFilter extends HTMLElement {
     } else {
       activeElement.classList.remove('active')
     }
-    // 自动
+    // 自动模式
     activeElement = this.content.querySelector('.var-auto')
+    if (state.state === 'on') {
+      if (activeElement.classList.contains('active') === false) {
+        activeElement.classList.add('active')
+      }
+    } else {
+      activeElement.classList.remove('active')
+    }
+    // 睡眠模式
+    activeElement = this.content.querySelector('.var-silent')
+    if (state.state === 'on') {
+      if (activeElement.classList.contains('active') === false) {
+        activeElement.classList.add('active')
+      }
+    } else {
+      activeElement.classList.remove('active')
+    }
+    // 最爱模式
+    activeElement = this.content.querySelector('.var-favorite')
     if (state.state === 'on') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
