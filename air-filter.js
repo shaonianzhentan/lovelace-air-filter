@@ -7203,15 +7203,89 @@ class AirFilter extends HTMLElement {
         const state = hass.states[entityId];
         const stateStr = state ? state.state : 'unavailable';
 
-        this.content.innerHTML = ui;
-        let style = document.createElement('style');
-        style.innerHTML = res;
-        this.content.appendChild(style);
+        this.content.innerHTML = `${ui}
+        <div class="air-filter-panel">
+        <div class="title">
+          <p>空气净化器</p>
+          <span>自动模式</span>
+        </div>
+        <div class="pm">
+          <p> PM2.5 参考值 </p>
+          <p> 28</p>
+          <p> 室内 优</p>
+        </div>
+        <div class="attr-row">
+          <div class="attr">
+            <p class="attr-title">滤芯剩余(%)</p>
+            <p class="attr-value">90</p>
+          </div>
+          <div class="attr">
+            <p class="attr-title">温度(&#8451;)</p>
+            <p class="attr-value">90</p>
+          </div>
+          <div class="attr">
+            <p class="attr-title">湿度(%)</p>
+            <p class="attr-value">90</p>
+          </div>
+        </div>
+        <div class="op-row">
+          <div class="op">
+              <button>
+                <span class="icon">
+                </span>
+                开关
+              </button>
+          </div>
+          <div class="op">
+              <button>
+              <span class="icon">
+                </span>
+                自动
+              </button>
+          </div>
+          <div class="op">
+              <button>
+              <span class="icon">
+                </span>
+                睡眠
+              </button>
+          </div>
+          <div class="op">
+              <button>
+              <span class="icon">
+                </span>
+                最爱
+              </button>
+          </div>
+        </div>
+      </div>
+        `;
+        let styleElement = document.createElement('style');
+        styleElement.innerHTML = `${style}
+        
+        p{padding:0;margin:0;}
+.air-filter-panel{text-align:center;}
+.title p{font-size:16px;padding:0;margin:0;}
+.title span{font-size:12px;}
+.pm{border-radius:50%;border:2px solid white;width:200px;height:200px;margin:30px auto;}
+.pm p:nth-child(1){margin-top:40px;}
+.pm p:nth-child(2){font-size:50px;}
+.attr-row{display:flex;}
+.attr-row .attr{width:100%;}
+.attr-row .attr-title{font-size:12px;}
+.attr-row .attr-value{font-size:25px;}
+.attr-row .attr:nth-child(2){border-left:1px solid white;border-right:1px solid white;}
+.op-row{display:flex;padding:20px 10px;background:white;margin-top:20px;}
+.op-row .op{width:100%;}
+.op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
+.op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
+        `;
+        this.content.appendChild(styleElement);
     }
 
     setConfig(config) {
         if (!config.entity) {
-            throw new Error('You need to define an entity');
+            throw new Error('你需要定义一个实体');
         }
         this.config = config;
     }
