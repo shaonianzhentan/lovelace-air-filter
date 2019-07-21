@@ -6937,7 +6937,7 @@ class AirFilter extends HTMLElement {
           .op-row .op{width:100%;}
           .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
-          .op-row .op.active{color:#01be9e;}
+          .op-row .op.active button{color:#01be9e;}
           `;
       root.appendChild(styleElement);
 
