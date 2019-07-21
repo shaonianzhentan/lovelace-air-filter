@@ -6943,7 +6943,7 @@ class AirFilter extends HTMLElement {
           .op-row .op{width:100%;}
           .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
-          .op-row .op.active button{color:#01be9e;text-shadow:0 0 20px #01be9e;}
+          .op-row .op.active button{color:#01be9e;text-shadow:0 0 10px #01be9e;}
           `;
       root.appendChild(styleElement);
 
@@ -7011,12 +7011,12 @@ class AirFilter extends HTMLElement {
       return;
     }
 
-    document.querySelector('.var-aqi').textContent = attrs['aqi']
-    document.querySelector('.var-filter_life_remaining').textContent = attrs['filter_life_remaining']
-    document.querySelector('.var-temperature').textContent = attrs['temperature']
-    document.querySelector('.var-humidity').textContent = attrs['humidity']
+    this.content.querySelector('.var-aqi').textContent = attrs['aqi']
+    this.content.querySelector('.var-filter_life_remaining').textContent = attrs['filter_life_remaining']
+    this.content.querySelector('.var-temperature').textContent = attrs['temperature']
+    this.content.querySelector('.var-humidity').textContent = attrs['humidity']
     //状态
-    let activeElement = document.querySelector('.var-state')
+    let activeElement = this.content.querySelector('.var-state')
     if (state.state === 'on') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
@@ -7025,7 +7025,7 @@ class AirFilter extends HTMLElement {
       activeElement.classList.remove('active')
     }
     // 自动
-    activeElement = document.querySelector('.var-auto')
+    activeElement = this.content.querySelector('.var-auto')
     if (state.state === 'on') {
       if (activeElement.classList.contains('active') === false) {
         activeElement.classList.add('active')
