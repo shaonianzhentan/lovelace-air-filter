@@ -6877,6 +6877,12 @@ const style = `
 
 class AirFilter extends HTMLElement {
   set hass(hass) {
+
+    const entityId = this.config.entity;
+    const state = hass.states[entityId];
+    const attrs = state.attributes;
+    console.log(state)
+
     if (!this.content) {
       let root = this.createShadowRoot();
 
@@ -6937,45 +6943,38 @@ class AirFilter extends HTMLElement {
           .op-row .op{width:100%;}
           .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
-          .op-row .op.active button{color:#01be9e;}
+          .op-row .op.active button{color:#01be9e;text-shadow:0 0 20px #01be9e;}
           `;
       root.appendChild(styleElement);
 
       !function (a) { var t, n = '<svg><symbol id="icon-love" viewBox="0 0 1024 1024"><path d="M932.458 153.429c-115.656-113.858-299.992-117.91-420.539-9.246C391.371 35.519 207.035 39.571 91.382 153.429c-118.065 116.51-119.328 306.667-2.818 424.733 0.934 0.945 1.871 1.885 2.818 2.818l352.307 349.117c37.021 37.684 97.58 38.221 135.264 1.195a79.2 79.2 0 0 0 1.195-1.195l352.311-348.795c118.152-116.421 119.559-306.58 3.137-424.733a309.664 309.664 0 0 0-3.138-3.14z m-45.596 382.6L534.556 885.148c-12.398 12.502-32.584 12.58-45.086 0.182-0.063-0.061-0.127-0.121-0.188-0.182L136.655 536.029c-93.236-92.035-94.213-242.225-2.186-335.462 0.724-0.733 1.453-1.459 2.186-2.184 91.765-89.358 237.27-91.733 331.9-5.42l43.363 37.303 43.039-37.303c95.053-85.877 240.568-82.802 331.904 7.015 92.799 92.475 93.061 242.668 0.584 335.467-0.19 0.192-0.387 0.387-0.583 0.584z" fill="#9C9C9C" ></path><path d="M296.709 224.847c-74.838 0-135.506 60.668-135.506 135.506 0.009 8.804 7.146 15.936 15.949 15.932 8.803-0.004 15.932-7.137 15.936-15.932 0-57.231 46.395-103.621 103.621-103.621 8.804-0.004 15.936-7.146 15.932-15.949 0-8.8-7.137-15.932-15.932-15.936z" fill="#9C9C9C" ></path></symbol><symbol id="icon-dianyuan" viewBox="0 0 1024 1024"><path d="M780.16 222.08l-38.4 38.4a368 368 0 0 1 131.2 279.04A355.84 355.84 0 1 1 304 256l-38.4-38.4a396.8 396.8 0 0 0-158.72 320 413.44 413.44 0 0 0 410.88 410.88 413.44 413.44 0 0 0 410.24-408.96 426.88 426.88 0 0 0-147.84-320z m0 0" fill="#9C9C9C" ></path><path d="M490.24 74.24h55.04v492.8h-55.04z" fill="#9C9C9C" ></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M96 512c0 229.749333 186.250667 416 416 416 216.853333 0 394.949333-165.92 414.261333-377.738667A319.514667 319.514667 0 0 1 704 640c-176.730667 0-320-143.269333-320-320a319.514667 319.514667 0 0 1 89.738667-222.261333C261.92 117.050667 96 295.146667 96 512z m485.264-416.72C499.749333 139.904 448 225.386667 448 320c0 141.386667 114.613333 256 256 256 94.613333 0 180.096-51.749333 224.72-133.264 14.949333-27.306667 56.138667-19.354667 59.84 11.557333A484.586667 484.586667 0 0 1 992 512c0 265.098667-214.901333 480-480 480S32 777.098667 32 512 246.901333 32 512 32c19.392 0 38.656 1.152 57.706667 3.434667 30.912 3.706667 38.864 44.896 11.557333 59.84z" fill="#9C9C9C" fill-opacity=".7" ></path></symbol><symbol id="icon-auto" viewBox="0 0 1024 1024"><path d="M511.8 960.3C265 960.3 64.2 759.5 64.2 512.8S265 65.2 511.8 65.2 959.3 266 959.3 512.8 758.6 960.3 511.8 960.3z m0-858.7c-226.7 0-411.2 184.4-411.2 411.2 0 226.7 184.4 411.1 411.2 411.1 226.7 0 411.1-184.4 411.1-411.1 0-226.8-184.4-411.2-411.1-411.2z" fill="#9C9C9C" ></path><path d="M326.3 620.4H284l-16.8-43.8h-77l-15.9 43.8H133l75-192.7h41.2l77.1 192.7z m-71.6-76.3l-26.6-71.5-26 71.5h52.6zM346.6 427.7h38.9V532c0 16.6 0.5 27.3 1.5 32.2 1.7 7.9 5.6 14.2 11.9 19 6.3 4.8 14.9 7.2 25.7 7.2 11 0 19.4-2.3 25-6.8 5.6-4.5 9-10 10.1-16.6 1.1-6.6 1.7-17.5 1.7-32.7V427.7h38.9v101.2c0 23.1-1 39.5-3.1 49-2.1 9.6-6 17.6-11.6 24.2-5.6 6.6-13.2 11.8-22.7 15.7s-21.8 5.9-37 5.9c-18.4 0-32.4-2.1-41.9-6.4-9.5-4.2-17-9.7-22.5-16.6-5.5-6.8-9.2-13.9-10.9-21.3-2.6-11-3.8-27.3-3.8-48.9V427.7zM584.7 620.4V460.3h-57.2v-32.6h153.1v32.6h-57v160.1h-38.9zM693 525.2c0-19.6 2.9-36.1 8.8-49.4 4.4-9.8 10.4-18.6 18-26.4 7.6-7.8 15.9-13.6 24.9-17.4 12-5.1 25.9-7.6 41.5-7.6 28.4 0 51.1 8.8 68.2 26.4s25.6 42.1 25.6 73.5c0 31.1-8.5 55.4-25.4 73s-39.5 26.4-67.8 26.4c-28.7 0-51.4-8.7-68.3-26.2-17.1-17.5-25.5-41.6-25.5-72.3z m40-1.3c0 21.8 5 38.3 15.1 49.6s22.8 16.9 38.4 16.9c15.5 0 28.2-5.6 38.2-16.8 10-11.2 14.9-27.9 14.9-50.3 0-22.1-4.9-38.5-14.5-49.4-9.7-10.9-22.6-16.3-38.6-16.3s-29 5.5-38.8 16.5c-9.8 11.1-14.7 27.7-14.7 49.8z" fill="#9C9C9C" ></path></symbol></svg>', e = (t = document.getElementsByTagName("script"))[t.length - 1].getAttribute("data-injectcss"); if (e && !a.__iconfont__svg__cssinject__) { a.__iconfont__svg__cssinject__ = !0; try { document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>") } catch (t) { console && console.log(t) } } !function (t) { if (document.addEventListener) if (~["complete", "loaded", "interactive"].indexOf(document.readyState)) setTimeout(t, 0); else { var e = function () { document.removeEventListener("DOMContentLoaded", e, !1), t() }; document.addEventListener("DOMContentLoaded", e, !1) } else document.attachEvent && (o = t, i = a.document, c = !1, (l = function () { try { i.documentElement.doScroll("left") } catch (t) { return void setTimeout(l, 50) } n() })(), i.onreadystatechange = function () { "complete" == i.readyState && (i.onreadystatechange = null, n()) }); function n() { c || (c = !0, o()) } var o, i, c, l }(function () { var t, e; (t = document.createElement("div")).innerHTML = n, n = null, (e = t.getElementsByTagName("svg")[0]) && (e.setAttribute("aria-hidden", "true"), e.style.position = "absolute", e.style.width = 0, e.style.height = 0, e.style.overflow = "hidden", function (t, e) { e.firstChild ? function (t, e) { e.parentNode.insertBefore(t, e) }(t, e.firstChild) : e.appendChild(t) }(e, root)) }) }(window);
-    }
 
-    const entityId = this.config.entity;
-    const state = hass.states[entityId];
-    const stateStr = state ? state.state : 'unavailable';
-    const attrs = state.attributes;
-    console.log(state)
-
-    this.content.innerHTML = `
+      this.content.innerHTML = `
         <div class="title">
           <p>${attrs['friendly_name'] || '空气净化器'}</p>
           <span>自动模式</span>
         </div>
         <div class="pm">
           <p> PM2.5 参考值 </p>
-          <p> ${attrs['aqi'] || 0}</p>
+          <p class="var-aqi"> ${attrs['aqi'] || 0}</p>
           <p> 室内 优</p>
         </div>
         <div class="attr-row">
           <div class="attr">
             <p class="attr-title">滤芯剩余(%)</p>
-            <p class="attr-value">${attrs['filter_life_remaining'] || 0}</p>
+            <p class="attr-value var-filter_life_remaining">${attrs['filter_life_remaining'] || 0}</p>
           </div>
           <div class="attr">
             <p class="attr-title">温度(&#8451;)</p>
-            <p class="attr-value">${attrs['temperature'] || 0}</p>
+            <p class="attr-value var-temperature">${attrs['temperature'] || 0}</p>
           </div>
           <div class="attr">
             <p class="attr-title">湿度(%)</p>
-            <p class="attr-value">${attrs['humidity'] || 0}</p>
+            <p class="attr-value var-humidity">${attrs['humidity'] || 0}</p>
           </div>
         </div>
         <div class="op-row">
-          <div class="op ${state.state=='on' ? 'active' : ''}">
+          <div class="op var-state ${state.state == 'on' ? 'active' : ''}">
               <button>
                 <span class="icon-waper">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#icon-dianyuan"></use></svg>
@@ -6983,7 +6982,7 @@ class AirFilter extends HTMLElement {
                 开关
               </button>
           </div>
-          <div class="op ${attrs['mode'] == 'auto' ? 'active' : ''}">
+          <div class="op  var-auto ${attrs['mode'] == 'auto' ? 'active' : ''}">
               <button>
               <span class="icon-waper">
                 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-auto"></use></svg>
@@ -7009,6 +7008,32 @@ class AirFilter extends HTMLElement {
           </div>
         </div>
         `;
+      return;
+    }
+
+    document.querySelector('.var-aqi').textContent = attrs['aqi']
+    document.querySelector('.var-filter_life_remaining').textContent = attrs['filter_life_remaining']
+    document.querySelector('.var-temperature').textContent = attrs['temperature']
+    document.querySelector('.var-humidity').textContent = attrs['humidity']
+    //状态
+    let activeElement = document.querySelector('.var-state')
+    if (state.state === 'on') {
+      if (activeElement.classList.contains('active') === false) {
+        activeElement.classList.add('active')
+      }
+    } else {
+      activeElement.classList.remove('active')
+    }
+    // 自动
+    activeElement = document.querySelector('.var-auto')
+    if (state.state === 'on') {
+      if (activeElement.classList.contains('active') === false) {
+        activeElement.classList.add('active')
+      }
+    } else {
+      activeElement.classList.remove('active')
+    }
+
   }
 
   setConfig(config) {
