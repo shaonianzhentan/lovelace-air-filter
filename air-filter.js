@@ -6876,38 +6876,41 @@ const style = `
 `
 
 class AirFilter extends HTMLElement {
-    set hass(hass) {
-        if (!this.content) {
-            const card = document.createElement('ha-card');
-            card.className = 'air-filter'
-            this.content = document.createElement('div');
-            this.content.className = 'air-filter-panel'
+  set hass(hass) {
+    if (!this.content) {      
+      let root = this.createShadowRoot();
 
-            //创建背景效果
-            let oFragmeng = document.createDocumentFragment();
-            for (var i = 0; i < 200; i++) {
-              let cc = document.createElement("div");
-              cc.className = 'circle-container'
-              let c = document.createElement('div')
-              c.className = 'circle'
-              cc.appendChild(c);
-              oFragmeng.appendChild(cc);
-            }
-            const container = document.createElement('div')
-            container.className = 'container'
-            container.appendChild(oFragmeng)
-            card.appendChild(container)
+      const card = document.createElement('ha-card');
+      card.className = 'air-filter'     
+
+      this.content = document.createElement('div');
+      this.content.className = 'air-filter-panel'
+
+      //创建背景效果
+      let oFragmeng = document.createDocumentFragment();
+      for (var i = 0; i < 200; i++) {
+        let cc = document.createElement("div");
+        cc.className = 'circle-container'
+        let c = document.createElement('div')
+        c.className = 'circle'
+        cc.appendChild(c);
+        oFragmeng.appendChild(cc);
+      }
+      const container = document.createElement('div')
+      container.className = 'container'
+      container.appendChild(oFragmeng)
+      card.appendChild(container)
 
 
-            card.appendChild(this.content);
-            this.appendChild(card);
-        }
+      card.appendChild(this.content);
+      root.appendChild(card);
+    }
 
-        const entityId = this.config.entity;
-        const state = hass.states[entityId];
-        const stateStr = state ? state.state : 'unavailable';
+    const entityId = this.config.entity;
+    const state = hass.states[entityId];
+    const stateStr = state ? state.state : 'unavailable';
 
-        this.content.innerHTML = `
+    this.content.innerHTML = `
         <div class="title">
           <p>空气净化器</p>
           <span>自动模式</span>
@@ -6962,8 +6965,8 @@ class AirFilter extends HTMLElement {
           </div>
         </div>
         `;
-        let styleElement = document.createElement('style');
-        styleElement.innerHTML = `${style}
+    let styleElement = document.createElement('style');
+    styleElement.innerHTML = `${style}
         .air-filter{background:black;}
         .air-filter,
         .air-filter-panel{height: 500px;
@@ -6990,21 +6993,21 @@ class AirFilter extends HTMLElement {
         .op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
         .op-row .op.active .icon{border-color:red;}
         `;
-        this.content.appendChild(styleElement);
-    }
+    this.content.appendChild(styleElement);
+  }
 
-    setConfig(config) {
-        if (!config.entity) {
-            throw new Error('你需要定义一个实体');
-        }
-        this.config = config;
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error('你需要定义一个实体');
     }
+    this.config = config;
+  }
 
-    // The height of your card. Home Assistant uses this to automatically
-    // distribute all cards over the available columns.
-    getCardSize() {
-        return 3;
-    }
+  // The height of your card. Home Assistant uses this to automatically
+  // distribute all cards over the available columns.
+  getCardSize() {
+    return 3;
+  }
 }
 
 customElements.define('air-filter', AirFilter);
