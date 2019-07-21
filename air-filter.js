@@ -6941,31 +6941,32 @@ class AirFilter extends HTMLElement {
         <div class="op-row">
           <div class="op">
               <button>
-                <span class="icon">
-                <svg class="icon" aria-hidden="true">
-  <use xlink:href="#icon-auto"></use>
-</svg>
+                <span class="icon-waper">
+                  <svg class="icon" aria-hidden="true"><use xlink:href="#icon-dianyuan"></use></svg>
                 </span>
                 开关
               </button>
           </div>
           <div class="op">
               <button>
-              <span class="icon">
-                </span>
+              <span class="icon-waper">
+                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-auto"></use></svg>
+              </span>
                 自动
               </button>
           </div>
           <div class="op">
               <button>
-              <span class="icon">
+              <span class="icon-waper">
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-moon"></use></svg>
                 </span>
                 睡眠
               </button>
           </div>
           <div class="op">
               <button>
-              <span class="icon">
+              <span class="icon-waper">
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-love"></use></svg>
                 </span>
                 最爱
               </button>
@@ -7001,10 +7002,10 @@ class AirFilter extends HTMLElement {
         .attr-row .attr-title{font-size:12px;}
         .attr-row .attr-value{font-size:25px;color:white;}
         .attr-row .attr:nth-child(2){border-left:1px solid #01be9e;border-right:1px solid #01be9e;}
-        .op-row{display:flex;padding:20px 10px;background:white;margin-top:20px;}
+        .op-row{display:flex;padding:10px;background:white;margin-top:20px;}
         .op-row .op{width:100%;}
         .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
-        .op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
+        .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
         .op-row .op.active .icon{border-color:red;}
         `;
     this.content.appendChild(styleElement);
