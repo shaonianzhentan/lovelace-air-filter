@@ -6964,23 +6964,31 @@ class AirFilter extends HTMLElement {
         `;
         let styleElement = document.createElement('style');
         styleElement.innerHTML = `${style}
-        
+        .air-filter{background:black;}
+        .air-filter,
+        .air-filter-panel{height: 500px;
+            overflow: hidden;
+            position: absolute;
+            width: 100%;}
+        .air-filter-panel{color:#eee;top:0;}
         p{padding:0;margin:0;}
-.air-filter-panel{text-align:center;}
-.title p{font-size:16px;padding:0;margin:0;}
-.title span{font-size:12px;}
-.pm{border-radius:50%;border:2px solid white;width:200px;height:200px;margin:30px auto;}
-.pm p:nth-child(1){margin-top:40px;}
-.pm p:nth-child(2){font-size:50px;}
-.attr-row{display:flex;}
-.attr-row .attr{width:100%;}
-.attr-row .attr-title{font-size:12px;}
-.attr-row .attr-value{font-size:25px;}
-.attr-row .attr:nth-child(2){border-left:1px solid white;border-right:1px solid white;}
-.op-row{display:flex;padding:20px 10px;background:white;margin-top:20px;}
-.op-row .op{width:100%;}
-.op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
-.op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
+        .air-filter-panel{text-align:center;}
+        .title{margin-top:20px;}
+        .title p{font-size:16px;padding:0;margin:0;}
+        .title span{font-size:12px;color:white;}
+        .pm{border-radius:50%;border:2px solid #01be9e;width:200px;height:200px;margin:30px auto;}
+        .pm p:nth-child(1){margin-top:40px;}
+        .pm p:nth-child(2){font-size:50px;color:white;}
+        .attr-row{display:flex;}
+        .attr-row .attr{width:100%;}
+        .attr-row .attr-title{font-size:12px;}
+        .attr-row .attr-value{font-size:25px;color:white;}
+        .attr-row .attr:nth-child(2){border-left:1px solid #01be9e;border-right:1px solid #01be9e;}
+        .op-row{display:flex;padding:20px 10px;background:white;margin-top:20px;}
+        .op-row .op{width:100%;}
+        .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
+        .op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
+        .op-row .op.active .icon{border-color:red;}
         `;
         this.content.appendChild(styleElement);
     }
