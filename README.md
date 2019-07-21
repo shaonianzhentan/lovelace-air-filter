@@ -10,4 +10,4 @@ views:
 - name: Example
   cards:
   - type: "custom:air-filter"
-    entity: input_boolean.switch_tv
+    entity: fan.xiaomi_miio_device
