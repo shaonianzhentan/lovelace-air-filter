@@ -6926,7 +6926,7 @@ class AirFilter extends HTMLElement {
           .title p{font-size:18px;padding:0;margin:0;font-weight:bold;color:white;}
           .title span{font-size:12px;color:white;}
           .pm{border-radius:50%;border:2px solid #01be9e;width:200px;height:200px;margin:30px auto;}
-          .pm p:nth-child(1){margin-top:40px;}
+          .pm p:nth-child(1){margin-top:50px;}
           .pm p:nth-child(2){font-size:50px;color:white;}
           .attr-row{display:flex;}
           .attr-row .attr{width:100%;}
@@ -6937,7 +6937,7 @@ class AirFilter extends HTMLElement {
           .op-row .op{width:100%;}
           .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
-          .op-row .op.active .icon{border-color:red;}
+          .op-row .op.active{color:#01be9e;}
           `;
       root.appendChild(styleElement);
 
@@ -6975,7 +6975,7 @@ class AirFilter extends HTMLElement {
           </div>
         </div>
         <div class="op-row">
-          <div class="op">
+          <div class="op ${state.state=='on' ? 'active' : ''}">
               <button>
                 <span class="icon-waper">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#icon-dianyuan"></use></svg>
@@ -6983,7 +6983,7 @@ class AirFilter extends HTMLElement {
                 开关
               </button>
           </div>
-          <div class="op">
+          <div class="op ${attrs['mode'] == 'auto' ? 'active' : ''}">
               <button>
               <span class="icon-waper">
                 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-auto"></use></svg>
