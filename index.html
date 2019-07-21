@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    body{margin:0;padding:0;}
+.air-filter{background:black;}
+.air-filter,
+.air-filter-panel{height: 500px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;}
+.air-filter-panel{color:#eee;top:0;}
+p{padding:0;margin:0;}
+.air-filter-panel{text-align:center;}
+.title{margin-top:20px;}
+.title p{font-size:16px;padding:0;margin:0;}
+.title span{font-size:12px;color:white;}
+.pm{border-radius:50%;border:2px solid #01be9e;width:200px;height:200px;margin:30px auto;}
+.pm p:nth-child(1){margin-top:40px;}
+.pm p:nth-child(2){font-size:50px;color:white;}
+.attr-row{display:flex;}
+.attr-row .attr{width:100%;}
+.attr-row .attr-title{font-size:12px;}
+.attr-row .attr-value{font-size:25px;color:white;}
+.attr-row .attr:nth-child(2){border-left:1px solid #01be9e;border-right:1px solid #01be9e;}
+.op-row{display:flex;padding:20px 10px;background:white;margin-top:20px;}
+.op-row .op{width:100%;}
+.op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
+.op-row .op .icon{display:block;width:30px;height:30px;border:1px solid silver;border-radius:50%;margin-bottom:10px;}
+.op-row .op.active .icon{border-color:red;}
+  </style>
+</head>
+
+<body>
+  <div class="air-filter">
+    <div class="container"></div>
+
+    <div class="air-filter-panel">
+      <div class="title">
+        <p>空气净化器</p>
+        <span>自动模式</span>
+      </div>
+      <div class="pm">
+        <p> PM2.5 参考值 </p>
+        <p> 28</p>
+        <p> 室内 优</p>
+      </div>
+      <div class="attr-row">
+        <div class="attr">
+          <p class="attr-title">滤芯剩余(%)</p>
+          <p class="attr-value">90</p>
+        </div>
+        <div class="attr">
+          <p class="attr-title">温度(&#8451;)</p>
+          <p class="attr-value">90</p>
+        </div>
+        <div class="attr">
+          <p class="attr-title">湿度(%)</p>
+          <p class="attr-value">90</p>
+        </div>
+      </div>
+      <div class="op-row">
+        <div class="op">
+          <button>
+            <span class="icon">
+            </span>
+            开关
+          </button>
+        </div>
+        <div class="op">
+          <button>
+            <span class="icon">
+            </span>
+            自动
+          </button>
+        </div>
+        <div class="op">
+          <button>
+            <span class="icon">
+            </span>
+            睡眠
+          </button>
+        </div>
+        <div class="op active">
+          <button>
+            <span class="icon">
+            </span>
+            最爱
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let oFragmeng = document.createDocumentFragment();
+    for (var i = 0; i < 200; i++) {
+      let cc = document.createElement("div");
+      cc.className = 'circle-container'
+      let c = document.createElement('div')
+      c.className = 'circle'
+      cc.appendChild(c);
+      oFragmeng.appendChild(cc);
+    }
+    document.querySelector('.container').appendChild(oFragmeng)
+  </script>
+</body>
+
+</html>
