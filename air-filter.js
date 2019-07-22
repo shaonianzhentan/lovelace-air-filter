@@ -7008,6 +7008,16 @@ class AirFilter extends HTMLElement {
           </div>
         </div>
         `;
+
+      //定义事件
+      // fan.set_speed
+      /**
+       {
+          "entity_id": "fan.xiaomi_miio_device",
+          "speed": "Auto"
+        } 
+      */ 
+
       return;
     }
 
