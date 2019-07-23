@@ -7017,21 +7017,22 @@ class AirFilter extends HTMLElement {
           "speed": "Auto"
         } 
       */ 
+     
+     console.log(hass)
 
-      document.querySelector('.var-state').onclick = ()=>{
+     this.content.querySelector('.var-state').onclick = ()=>{
         console.log('开关')
       }
-      document.querySelector('.var-auto').onclick = ()=>{
+      this.content.querySelector('.var-auto').onclick = ()=>{
         console.log('自动')
       }
-      document.querySelector('.var-silent').onclick = ()=>{
+      this.content.querySelector('.var-silent').onclick = ()=>{
         console.log('睡眠')
       }
-      document.querySelector('.var-favorite').onclick = ()=>{
+      this.content.querySelector('.var-favorite').onclick = ()=>{
         console.log('最爱')
       }
 
-      console.log(hass)
 
 
       return;
