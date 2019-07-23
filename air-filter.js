@@ -6922,7 +6922,7 @@ class AirFilter extends HTMLElement {
           }
           .air-filter{background:black;position: relative;}
           .air-filter,
-          .air-filter-panel{height: 500px;
+          .air-filter-panel{height: 460px;
               overflow: hidden;            
               width: 100%;}
           .air-filter-panel{color:#eee;top:0;position: absolute;}
@@ -7017,6 +7017,22 @@ class AirFilter extends HTMLElement {
           "speed": "Auto"
         } 
       */ 
+
+      document.querySelector('.var-state').onclick = ()=>{
+        console.log('开关')
+      }
+      document.querySelector('.var-auto').onclick = ()=>{
+        console.log('自动')
+      }
+      document.querySelector('.var-silent').onclick = ()=>{
+        console.log('睡眠')
+      }
+      document.querySelector('.var-favorite').onclick = ()=>{
+        console.log('最爱')
+      }
+
+      console.log(hass)
+
 
       return;
     }
