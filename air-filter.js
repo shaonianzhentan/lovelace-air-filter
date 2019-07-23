@@ -6886,6 +6886,12 @@ class AirFilter extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const attrs = state.attributes;
+    const mode = {
+      'auto': '自动模式',
+      'silent': '睡眠模式',
+      'favorite': '最爱模式'
+    }
+    const modeName = mode[attrs['mode']] || attrs['mode']
     log(state)
 
     if (!this.content) {
@@ -6957,7 +6963,7 @@ class AirFilter extends HTMLElement {
       this.content.innerHTML = `
         <div class="title">
           <p>${attrs['friendly_name'] || '空气净化器'}</p>
-          <span>自动模式</span>
+          <span class="var-mode">${modeName}</span>
         </div>
         <div class="pm">
           <p> PM2.5 参考值 </p>
@@ -7046,6 +7052,7 @@ class AirFilter extends HTMLElement {
       return;
     }
 
+    this.content.querySelector('.var-mode').textContent = modeName
     this.content.querySelector('.var-aqi').textContent = attrs['aqi']
     this.content.querySelector('.var-filter_life_remaining').textContent = attrs['filter_life_remaining']
     this.content.querySelector('.var-temperature').textContent = attrs['temperature']
