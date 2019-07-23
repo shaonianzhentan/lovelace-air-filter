@@ -6962,25 +6962,25 @@ class AirFilter extends HTMLElement {
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
           .op-row .op.active button{color:#01be9e;text-shadow:0 0 10px #01be9e;}
 
-          .level-1 .pm{border-color:blue!important;}
-          .level-1 .attr-row .attr:nth-child(2){border-color:blue!important;}
-          .level-1 .op-row .op.active button{color:blue!important;text-shadow:0 0 10px blue!important;}
+          .level-1 .pm{border-color:#01be9e!important;}
+          .level-1 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
+          .level-1 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
 
           .level-2 .pm{border-color:#01be9e!important;}
           .level-2 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
           .level-2 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
 
-          .level-3 .pm{border-color:#01be9e!important;}
-          .level-3 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
-          .level-3 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+          .level-3 .pm{border-color:orange!important;}
+          .level-3 .attr-row .attr:nth-child(2){border-color:orange!important;}
+          .level-3 .op-row .op.active button{color:orange!important;text-shadow:0 0 10px orange!important;}
 
-          .level-4 .pm{border-color:#01be9e!important;}
-          .level-4 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
-          .level-4 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+          .level-4 .pm{border-color:blue!important;}
+          .level-4 .attr-row .attr:nth-child(2){border-color:blue!important;}
+          .level-4 .op-row .op.active button{color:blue!important;text-shadow:0 0 10px blue!important;}
 
-          .level-5 .pm{border-color:#01be9e!important;}
-          .level-5 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
-          .level-5 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+          .level-5 .pm{border-color:red!important;}
+          .level-5 .attr-row .attr:nth-child(2){border-color:red!important;}
+          .level-5 .op-row .op.active button{color:red!important;text-shadow:0 0 10px red!important;}
 
           .level-6 .pm{border-color:red!important;}
           .level-6 .attr-row .attr:nth-child(2){border-color:red!important;}
