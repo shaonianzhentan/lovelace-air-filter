@@ -6876,7 +6876,7 @@ const style = `
 `
 
 // 加入日志开关
-function log(){
+function log() {
   console.log(...arguments)
 }
 
@@ -6886,12 +6886,18 @@ class AirFilter extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const attrs = state.attributes;
+    // PM2.5值
+    let aqi = attrs['aqi'] || 0
+    // 模式
     const mode = {
       'auto': '自动模式',
       'silent': '睡眠模式',
       'favorite': '最爱模式'
     }
     const modeName = mode[attrs['mode']] || attrs['mode']
+    // 质量
+    let quality = '优'
+
     log(state)
 
     if (!this.content) {
@@ -6955,6 +6961,30 @@ class AirFilter extends HTMLElement {
           .op-row .op button{background:transparent;border:none;outline:none;cursor:pointer;}
           .op-row .op .icon-waper{display:block;width:30px;height:30px;margin-bottom:5px;}
           .op-row .op.active button{color:#01be9e;text-shadow:0 0 10px #01be9e;}
+
+          .level-1 .pm{border-color:blue!important;}
+          .level-1 .attr-row .attr:nth-child(2){border-color:blue!important;}
+          .level-1 .op-row .op.active button{color:blue!important;text-shadow:0 0 10px blue!important;}
+
+          .level-2 .pm{border-color:#01be9e!important;}
+          .level-2 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
+          .level-2 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+
+          .level-3 .pm{border-color:#01be9e!important;}
+          .level-3 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
+          .level-3 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+
+          .level-4 .pm{border-color:#01be9e!important;}
+          .level-4 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
+          .level-4 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+
+          .level-5 .pm{border-color:#01be9e!important;}
+          .level-5 .attr-row .attr:nth-child(2){border-color:#01be9e!important;}
+          .level-5 .op-row .op.active button{color:#01be9e!important;text-shadow:0 0 10px #01be9e!important;}
+
+          .level-6 .pm{border-color:red!important;}
+          .level-6 .attr-row .attr:nth-child(2){border-color:red!important;}
+          .level-6 .op-row .op.active button{color:red!important;text-shadow:0 0 10px red!important;}
           `;
       root.appendChild(styleElement);
 
@@ -6967,8 +6997,8 @@ class AirFilter extends HTMLElement {
         </div>
         <div class="pm">
           <p> PM2.5 参考值 </p>
-          <p class="var-aqi"> ${attrs['aqi'] || 0}</p>
-          <p> 室内 优</p>
+          <p class="var-aqi"> ${aqi}</p>
+          <p> 室内 <label class="var-quality">${quality}</label></p>
         </div>
         <div class="attr-row">
           <div class="attr">
@@ -7052,6 +7082,37 @@ class AirFilter extends HTMLElement {
       return;
     }
 
+    this.content.classList.forEach(key=>{
+      this.content.classList.remove(key)
+    })
+    this.content.classList.add('air-filter-panel')
+    
+    if (aqi < 50) {
+      quality = '优'
+      this.content.classList.add('level-1')
+    }
+    else if (aqi < 100) {
+      quality = '良'
+      this.content.classList.add('level-2')
+    }
+    else if (aqi < 150) {
+      quality = '轻度污染'
+      this.content.classList.add('level-3')
+    }
+    else if (aqi < 200) {
+      quality = '中度污染'
+      this.content.classList.add('level-4')
+    }
+    else if (aqi < 300) {
+      quality = '重度污染'
+      this.content.classList.add('level-5')
+    }
+    else {
+      quality = '严重污染'
+      this.content.classList.add('level-6')
+    }
+
+    this.content.querySelector('.var-quality').textContent = quality
     this.content.querySelector('.var-mode').textContent = modeName
     this.content.querySelector('.var-aqi').textContent = attrs['aqi']
     this.content.querySelector('.var-filter_life_remaining').textContent = attrs['filter_life_remaining']
