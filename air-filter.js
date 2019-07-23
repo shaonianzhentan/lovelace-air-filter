@@ -6875,13 +6875,18 @@ const style = `
 }
 `
 
+// 加入日志开关
+function log(){
+  console.log(...arguments)
+}
+
 class AirFilter extends HTMLElement {
   set hass(hass) {
 
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const attrs = state.attributes;
-    console.log(state)
+    log(state)
 
     if (!this.content) {
       let root = this.createShadowRoot();
@@ -7009,39 +7014,30 @@ class AirFilter extends HTMLElement {
         </div>
         `;
 
-      //定义事件
-      // fan.set_speed
-      /**
-       {
-          "entity_id": "fan.xiaomi_miio_device",
-          "speed": "Auto"
-        } 
-      */
-
-      console.log(hass)
+      log(hass)
 
       this.content.querySelector('.var-state').onclick = () => {
-        // console.log('开关')
+        log('开关')
         hass.callService('fan', 'toggle', {
           entity_id: entityId
         });
       }
       this.content.querySelector('.var-auto').onclick = () => {
-        console.log('自动')
+        log('自动')
         hass.callService('fan', 'set_speed', {
           entity_id: entityId,
           speed: 'Auto'
         });
       }
       this.content.querySelector('.var-silent').onclick = () => {
-        console.log('睡眠')
+        log('睡眠')
         hass.callService('fan', 'set_speed', {
           entity_id: entityId,
           speed: 'Silent'
         });
       }
       this.content.querySelector('.var-favorite').onclick = () => {
-        console.log('最爱')
+        log('最爱')
         hass.callService('fan', 'set_speed', {
           entity_id: entityId,
           speed: 'Favorite'
