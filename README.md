@@ -4,12 +4,12 @@
 ```
 // 引入
 resources:
-  - url: /local/air-filter.js
-    type: js
+  - type: js
+    url: /community_plugin/lovelace-air-filter/air-filter.js
 
 
 //使用面板卡
-type: "custom:air-filter"
+type: 'custom:air-filter'
 entity: fan.xiaomi_miio_device
 
 ```
