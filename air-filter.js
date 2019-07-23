@@ -7016,25 +7016,37 @@ class AirFilter extends HTMLElement {
           "entity_id": "fan.xiaomi_miio_device",
           "speed": "Auto"
         } 
-      */ 
-     
-     console.log(hass)
+      */
 
-     this.content.querySelector('.var-state').onclick = ()=>{
-        console.log('开关')
+      console.log(hass)
+
+      this.content.querySelector('.var-state').onclick = () => {
+        // console.log('开关')
+        hass.callService('fan', 'toggle', {
+          entity_id: entityId
+        });
       }
-      this.content.querySelector('.var-auto').onclick = ()=>{
+      this.content.querySelector('.var-auto').onclick = () => {
         console.log('自动')
+        hass.callService('fan', 'set_speed', {
+          entity_id: entityId,
+          speed: 'Auto'
+        });
       }
-      this.content.querySelector('.var-silent').onclick = ()=>{
+      this.content.querySelector('.var-silent').onclick = () => {
         console.log('睡眠')
+        hass.callService('fan', 'set_speed', {
+          entity_id: entityId,
+          speed: 'Silent'
+        });
       }
-      this.content.querySelector('.var-favorite').onclick = ()=>{
+      this.content.querySelector('.var-favorite').onclick = () => {
         console.log('最爱')
+        hass.callService('fan', 'set_speed', {
+          entity_id: entityId,
+          speed: 'Favorite'
+        });
       }
-
-
-
       return;
     }
 
