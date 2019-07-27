@@ -7185,6 +7185,7 @@ class AirFilter extends HTMLElement {
       humidity: attrs['humidity'],
       state: state.state
     })
+    
   }
 
   setConfig(config) {
