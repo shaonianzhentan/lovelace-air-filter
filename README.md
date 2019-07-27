@@ -34,6 +34,7 @@ style: >-
 
 #### 选择设备
 ![选择设备](https://raw.githubusercontent.com/shaonianzhentan/lovelace-air-filter/master/screenshots/1.png)
+![选择设备](https://raw.githubusercontent.com/shaonianzhentan/lovelace-air-filter/master/screenshots/2.png)
 
 ## 更新日志
 
