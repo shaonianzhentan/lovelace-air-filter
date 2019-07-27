@@ -7169,7 +7169,7 @@ class AirFilter extends HTMLElement {
       root.appendChild(card);
       // 添加样式
       let styleElement = document.createElement('style');
-      styleElement.innerHTML = `.air-filter{background:black;position: relative;height: 470px;overflow: hidden; width: 100%;}
+      styleElement.innerHTML = `.air-filter{background:black;position: relative;height: 465px;overflow: hidden; width: 100%;}
       ${style}`;
       root.appendChild(styleElement);
 
@@ -7185,7 +7185,7 @@ class AirFilter extends HTMLElement {
       humidity: attrs['humidity'],
       state: state.state
     })
-    
+
   }
 
   setConfig(config) {
