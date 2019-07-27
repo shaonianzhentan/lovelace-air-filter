@@ -7179,7 +7179,7 @@ class AirFilter extends HTMLElement {
     //设置值
     setUI(this.card.querySelector('.air-filter-panel'), {
       mode: attrs['mode'],
-      aqi: aqi,
+      aqi: attrs['aqi'],
       filter_life_remaining: attrs['filter_life_remaining'],
       temperature: attrs['temperature'],
       humidity: attrs['humidity'],
