@@ -7019,8 +7019,8 @@ p{padding:0;margin:0;}
   return div
 }
 
-// 设置UI值
-function setUI(div, { quality, mode, modeName, aqi,
+ // 设置UI值
+ function setUI(div, { mode, aqi,
   filter_life_remaining,
   temperature,
   humidity, state }) {
@@ -7029,6 +7029,16 @@ function setUI(div, { quality, mode, modeName, aqi,
       div.classList.remove(key)
   })
   div.classList.add('air-filter-panel')
+
+  // 模式
+  const modeObj = {
+      'auto': '自动模式',
+      'silent': '睡眠模式',
+      'favorite': '最爱模式'
+  }
+  const modeName = modeObj[mode]
+  // 质量
+  let quality = '优'
 
   if (aqi < 50) {
       quality = '优'
@@ -7054,6 +7064,8 @@ function setUI(div, { quality, mode, modeName, aqi,
       quality = '严重污染'
       div.classList.add('level-6')
   }
+
+
 
   div.querySelector('.var-quality').textContent = quality
   div.querySelector('.var-mode').textContent = modeName
@@ -7111,18 +7123,7 @@ class AirFilter extends HTMLElement {
     const style = this.config.style || '';
     const state = hass.states[entityId];
     const attrs = state.attributes;
-    // PM2.5值
-    let aqi = attrs['aqi'] || 0
-    // 模式
-    const mode = {
-      'auto': '自动模式',
-      'silent': '睡眠模式',
-      'favorite': '最爱模式'
-    }
-    const modeName = mode[attrs['mode']] || attrs['mode']
-    // 质量
-    let quality = '优'
-
+   
     if (!this.card) {
       let root = this.createShadowRoot();
 
@@ -7177,7 +7178,6 @@ class AirFilter extends HTMLElement {
 
     //设置值
     setUI(this.card.querySelector('.air-filter-panel'), {
-      quality: quality,
       mode: attrs['mode'],
       aqi: aqi,
       filter_life_remaining: attrs['filter_life_remaining'],
