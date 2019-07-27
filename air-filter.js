@@ -7113,7 +7113,7 @@ p{padding:0;margin:0;}
 
 // 加入日志开关
 function log() {
-  console.log(...arguments)
+  // console.log(...arguments)
 }
 
 class AirFilter extends HTMLElement {
