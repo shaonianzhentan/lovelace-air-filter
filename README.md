@@ -18,7 +18,7 @@ type: 'custom:air-filter'
 entity: fan.xiaomi_miio_device
 style: >-
   .air-filter-panel{
-    background-image:url(https://c1.mifile.cn/f/i/16/chain/air2s/mj-mtair2s-atlas-01.jpg);
+    background-image:url(https://c1.mifile.cn/f/i/16/chain/air2s/mj-mtair2s-atlas-04.jpg);
     background-size:cover; 
   }
 
