@@ -77,7 +77,7 @@ p{padding:0;margin:0;}
 .level-6 .op-row .op.active button{color:red!important;text-shadow:0 0 10px red!important;}
         </style>
         <div class="title">
-          <p>空气净化器</p>
+          <p class="var-title">空气净化器</p>
           <span class="var-mode">自动模式</span>
         </div>
         <div class="pm">
@@ -138,7 +138,7 @@ p{padding:0;margin:0;}
         }
 
         // 设置UI值
-        function setUI(div, { mode, aqi,
+        function setUI(div, { title, mode, aqi,
             filter_life_remaining,
             temperature,
             humidity, state }) {
@@ -185,6 +185,7 @@ p{padding:0;margin:0;}
 
 
 
+            div.querySelector('.var-title').textContent = title
             div.querySelector('.var-quality').textContent = quality
             div.querySelector('.var-mode').textContent = modeName
             div.querySelector('.var-aqi').textContent = aqi

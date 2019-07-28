@@ -6896,7 +6896,7 @@ animation-delay: 2269ms;
   container.appendChild(oFragmeng)
   return container
 }
-
+/*********************************** UI设置 ************************************/
 function getUI() {
 
   let div = document.createElement('div')
@@ -6959,7 +6959,7 @@ p{padding:0;margin:0;}
 .level-6 .op-row .op.active button{color:red!important;text-shadow:0 0 10px red!important;}
 </style>
 <div class="title">
-<p>空气净化器</p>
+<p class="var-title">空气净化器</p>
 <span class="var-mode">自动模式</span>
 </div>
 <div class="pm">
@@ -7019,54 +7019,55 @@ p{padding:0;margin:0;}
   return div
 }
 
- // 设置UI值
- function setUI(div, { mode, aqi,
+// 设置UI值
+function setUI(div, { title, mode, aqi,
   filter_life_remaining,
   temperature,
   humidity, state }) {
 
   div.classList.forEach(key => {
-      div.classList.remove(key)
+    div.classList.remove(key)
   })
   div.classList.add('air-filter-panel')
 
   // 模式
   const modeObj = {
-      'auto': '自动模式',
-      'silent': '睡眠模式',
-      'favorite': '最爱模式'
+    'auto': '自动模式',
+    'silent': '睡眠模式',
+    'favorite': '最爱模式'
   }
   const modeName = modeObj[mode]
   // 质量
   let quality = '优'
 
   if (aqi < 50) {
-      quality = '优'
-      div.classList.add('level-1')
+    quality = '优'
+    div.classList.add('level-1')
   }
   else if (aqi < 100) {
-      quality = '良'
-      div.classList.add('level-2')
+    quality = '良'
+    div.classList.add('level-2')
   }
   else if (aqi < 150) {
-      quality = '轻度污染'
-      div.classList.add('level-3')
+    quality = '轻度污染'
+    div.classList.add('level-3')
   }
   else if (aqi < 200) {
-      quality = '中度污染'
-      div.classList.add('level-4')
+    quality = '中度污染'
+    div.classList.add('level-4')
   }
   else if (aqi < 300) {
-      quality = '重度污染'
-      div.classList.add('level-5')
+    quality = '重度污染'
+    div.classList.add('level-5')
   }
   else {
-      quality = '严重污染'
-      div.classList.add('level-6')
+    quality = '严重污染'
+    div.classList.add('level-6')
   }
 
 
 
+  div.querySelector('.var-title').textContent = title
   div.querySelector('.var-quality').textContent = quality
   div.querySelector('.var-mode').textContent = modeName
   div.querySelector('.var-aqi').textContent = aqi
@@ -7076,40 +7077,42 @@ p{padding:0;margin:0;}
   //状态
   let activeElement = div.querySelector('.var-state')
   if (state === 'on') {
-      if (activeElement.classList.contains('active') === false) {
-          activeElement.classList.add('active')
-      }
+    if (activeElement.classList.contains('active') === false) {
+      activeElement.classList.add('active')
+    }
   } else {
-      activeElement.classList.remove('active')
+    activeElement.classList.remove('active')
   }
   // 自动模式
   activeElement = div.querySelector('.var-auto')
   if (mode == 'auto') {
-      if (activeElement.classList.contains('active') === false) {
-          activeElement.classList.add('active')
-      }
+    if (activeElement.classList.contains('active') === false) {
+      activeElement.classList.add('active')
+    }
   } else {
-      activeElement.classList.remove('active')
+    activeElement.classList.remove('active')
   }
   // 睡眠模式
   activeElement = div.querySelector('.var-silent')
   if (mode == 'silent') {
-      if (activeElement.classList.contains('active') === false) {
-          activeElement.classList.add('active')
-      }
+    if (activeElement.classList.contains('active') === false) {
+      activeElement.classList.add('active')
+    }
   } else {
-      activeElement.classList.remove('active')
+    activeElement.classList.remove('active')
   }
   // 最爱模式
   activeElement = div.querySelector('.var-favorite')
   if (mode == 'favorite') {
-      if (activeElement.classList.contains('active') === false) {
-          activeElement.classList.add('active')
-      }
+    if (activeElement.classList.contains('active') === false) {
+      activeElement.classList.add('active')
+    }
   } else {
-      activeElement.classList.remove('active')
+    activeElement.classList.remove('active')
   }
 }
+
+/*********************************** UI设置 ************************************/
 
 // 加入日志开关
 function log() {
@@ -7123,7 +7126,7 @@ class AirFilter extends HTMLElement {
     const style = this.config.style || '';
     const state = hass.states[entityId];
     const attrs = state.attributes;
-   
+
     if (!this.card) {
       let root = this.createShadowRoot();
 
@@ -7178,6 +7181,7 @@ class AirFilter extends HTMLElement {
 
     //设置值
     setUI(this.card.querySelector('.air-filter-panel'), {
+      title: attrs['friendly_name'] || '空气净化器',
       mode: attrs['mode'],
       aqi: attrs['aqi'],
       filter_life_remaining: attrs['filter_life_remaining'],
