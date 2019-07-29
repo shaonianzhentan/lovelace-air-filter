@@ -7184,8 +7184,10 @@ class AirFilter extends HTMLElement {
         card.className = 'air-filter'
 
         // 创建背景效果
-        const container = getBg()
-        card.appendChild(container)
+        if(!style){
+          const container = getBg()
+          card.appendChild(container)
+        }
 
         // 创建UI
         const ui = getUI()
