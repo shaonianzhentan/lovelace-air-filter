@@ -7114,6 +7114,47 @@ function setUI(div, { title, mode, aqi,
 
 /*********************************** UI设置 ************************************/
 
+
+
+/********************弹窗信息**************************/
+function getDialog() {
+  let div = document.createElement('div')
+  div.className = 'dialog'
+  div.innerHTML = `        
+        <style>
+          .dialog{ height:100%; text-align:center; background:black;}
+          .dialog-panel{display: flex; flex-wrap: wrap;}
+          .dialog-panel p{margin:0;padding:0;}
+          .dialog-panel .dialog-attr{width:50%;box-sizing: border-box;border-right:1px solid #01be9e;border-bottom:1px solid #01be9e;padding:20px 0;}
+          .dialog-panel .dialog-attr:nth-child(even){border-right:none;}
+          .dialog-title{font-size:12px;color:#eee;}
+          .dialog-value{font-size:25px;color:#fff;}
+        </style>
+        <div class="dialog-panel">
+          <div class="dialog-attr">
+            <p class="dialog-title">累计运行时间(小时)</p>
+            <p class="dialog-value var-filter_hours_used">0</p>
+          </div>
+          <div class="dialog-attr">
+            <p class="dialog-title">累计净化空气量(㎥)</p>
+            <p class="dialog-value var-purify_volume">0</p>
+          </div>          
+        </div>
+        <div class="dialog-close" style="width:100%;padding:20px 0;border-right:none;color:white;text-shadow:0 0 10px #01be9e;cursor:pointer;">
+            <b>退出查看</b>
+        </div>
+      `
+  return div
+}
+
+function setDialog(div, { filter_hours_used, purify_volume }) {
+  div.querySelector('.var-filter_hours_used').textContent = filter_hours_used
+  div.querySelector('.var-purify_volume').textContent = purify_volume
+}
+
+/**********************弹窗信息************************/
+
+
 // 加入日志开关
 function log() {
   // console.log(...arguments)
@@ -7130,7 +7171,7 @@ class AirFilter extends HTMLElement {
     if (!this.card) {
       let root = this.createShadowRoot();
 
-      const card = document.createElement('ha-card');
+      const card = document.createElement('div');
       card.className = 'air-filter'
 
       // 创建背景效果
@@ -7168,6 +7209,18 @@ class AirFilter extends HTMLElement {
           speed: 'Favorite'
         });
       }
+      ui.querySelector('.var-title').onclick = () => {
+        log('最爱')
+        card.querySelector('.dialog').style.display = 'block'
+      }
+
+      // 创建更多信息
+      const dialog = getDialog()
+      card.appendChild(dialog)
+
+      dialog.querySelector('.dialog-close').onclick = ()=>{
+        dialog.style.display = 'none'
+      }
 
       root.appendChild(card);
       // 添加样式
@@ -7189,7 +7242,11 @@ class AirFilter extends HTMLElement {
       humidity: attrs['humidity'],
       state: state.state
     })
-
+    //设置更多信息值
+    setDialog(this.card.querySelector('.dialog'), {
+      filter_hours_used: attrs['filter_hours_used'] || 0, 
+      purify_volume: attrs['purify_volume'] || 0
+    })
   }
 
   setConfig(config) {
