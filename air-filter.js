@@ -7119,36 +7119,36 @@ function getDialog() {
   let div = document.createElement('div')
   div.className = 'dialog'
   div.innerHTML = `        
-      <style>
-        .dialog{ height:100%; display:none; text-align:center; background:rgba(0,0,0,.8);position: absolute;top: 0;width: 100%;}
-        .dialog-panel{display: flex; flex-wrap: wrap;}
-        .dialog-panel .dialog-attr{width:50%;box-sizing: border-box;border-right:1px solid #9e9e9e;border-bottom:1px solid #9e9e9e;padding:20px 0;}
-        .dialog-panel .dialog-attr:nth-child(even){border-right:none;}
-        .dialog-title{font-size:12px;color:#eee;padding: 10px 0;}
-        .dialog-value{font-size:25px;color:#fff;}
-      </style>
-      <div class="dialog-panel">
-        <div class="dialog-attr">
-          <p class="dialog-title">累计运行时间(小时)</p>
-          <p class="dialog-value var-filter_hours_used">0</p>
-        </div>
-        <div class="dialog-attr">
-          <p class="dialog-title">累计运行时间(天)</p>
-          <p class="dialog-value var-filter_days_used">0</p>
-        </div>
-        <div class="dialog-attr">
-          <p class="dialog-title">累计净化空气量(㎥)</p>
-          <p class="dialog-value var-purify_volume">0</p>
-        </div>
-        <div class="dialog-attr">
-          <p class="dialog-title">面板LED灯</p>
-          <p class="dialog-value var-led">开启</p>
-        </div>          
+    <style>
+      .dialog{ height:100%; display:none; text-align:center; background:rgba(0,0,0,.8);position: absolute;top: 0;width: 100%;}
+      .dialog-panel{display: flex; flex-wrap: wrap;}
+      .dialog-panel .dialog-attr{width:50%;box-sizing: border-box;border-right:1px solid #9e9e9e;border-bottom:1px solid #9e9e9e;padding:20px 0;}
+      .dialog-panel .dialog-attr:nth-child(even){border-right:none;}
+      .dialog-title{font-size:12px;color:#eee;padding: 10px 0;}
+      .dialog-value{font-size:25px;color:#fff;}
+    </style>
+    <div class="dialog-panel">
+      <div class="dialog-attr">
+        <p class="dialog-title">累计运行时间(小时)</p>
+        <p class="dialog-value var-filter_hours_used">0</p>
       </div>
-      <div class="dialog-close" style="width:100%;padding:20px 0;border-right:none;color:white;text-shadow:0 0 10px #9e9e9e;cursor:pointer;">
-          <b>退出查看</b>
+      <div class="dialog-attr">
+        <p class="dialog-title">累计运行时间(天)</p>
+        <p class="dialog-value var-filter_days_used">0</p>
       </div>
-    `
+      <div class="dialog-attr">
+        <p class="dialog-title">累计净化空气量(㎥)</p>
+        <p class="dialog-value var-purify_volume">0</p>
+      </div>
+      <div class="dialog-attr">
+        <p class="dialog-title">面板LED灯</p>
+        <p class="dialog-value var-led">开启</p>
+      </div>          
+    </div>
+    <div class="dialog-close" style="width:100%;padding:20px 0;border-right:none;color:white;text-shadow:0 0 10px #9e9e9e;cursor:pointer;font-size:20px;">
+        <b>退出查看</b>
+    </div>
+  `
   return div
 }
 
@@ -7160,7 +7160,6 @@ function setDialog(div, { filter_hours_used, purify_volume, led }) {
 }
 
 /**********************弹窗信息************************/
-
 
 // 加入日志开关
 function log() {
@@ -7233,13 +7232,13 @@ class AirFilter extends HTMLElement {
       dialog.querySelector('.var-led').onclick = () => {
         let ledState = attrs['led']
         // 如果当前开就关
-        hass.callService('fan', ledState ? 'fan.xiaomi_miio_set_led_off' : 'xiaomi_miio_set_led_on', {
+        hass.callService('fan', ledState ? 'xiaomi_miio_set_led_off' : 'xiaomi_miio_set_led_on', {
           entity_id: entityId
         });
         // 提示操作
-        hass.callService('notify', 'notify', {
+        hass.callService('persistent_notification', 'create', {
           message: `${ledState ? '关闭' : '开启'}了${attrs['friendly_name']}的LED灯`,
-          title: `执行LED操作`
+          title: `【${new Date().toLocaleTimeString()}】执行LED操作`
         });
       }
 
