@@ -21,12 +21,11 @@
       div.className = 'dialog'
       div.innerHTML = `        
         <style>
-          .dialog{ height:100%; text-align:center; background:black;}
+          .dialog{ height:100%; text-align:center; background:rgba(0,0,0,.8);position: absolute;top: 0;width: 100%;}
           .dialog-panel{display: flex; flex-wrap: wrap;}
-          .dialog-panel p{margin:0;padding:0;}
           .dialog-panel .dialog-attr{width:50%;box-sizing: border-box;border-right:1px solid #01be9e;border-bottom:1px solid #01be9e;padding:20px 0;}
           .dialog-panel .dialog-attr:nth-child(even){border-right:none;}
-          .dialog-title{font-size:12px;color:#eee;}
+          .dialog-title{font-size:12px;color:#eee;padding: 10px 0;}
           .dialog-value{font-size:25px;color:#fff;}
         </style>
         <div class="dialog-panel">
@@ -35,8 +34,16 @@
             <p class="dialog-value var-filter_hours_used">0</p>
           </div>
           <div class="dialog-attr">
+            <p class="dialog-title">累计运行时间(天)</p>
+            <p class="dialog-value var-filter_days_used">0</p>
+          </div>
+          <div class="dialog-attr">
             <p class="dialog-title">累计净化空气量(㎥)</p>
             <p class="dialog-value var-purify_volume">0</p>
+          </div>
+          <div class="dialog-attr">
+            <p class="dialog-title">面板LED灯</p>
+            <p class="dialog-value var-led">开启</p>
           </div>          
         </div>
         <div class="dialog-close" style="width:100%;padding:20px 0;border-right:none;color:white;text-shadow:0 0 10px #01be9e;cursor:pointer;">
@@ -46,9 +53,11 @@
       return div
     }
 
-    function setDialog(div, { filter_hours_used, purify_volume}){
+    function setDialog(div, { filter_hours_used, purify_volume, led}){
       div.querySelector('.var-filter_hours_used').textContent = filter_hours_used
       div.querySelector('.var-purify_volume').textContent = purify_volume
+      div.querySelector('.var-filter_days_used').textContent = Math.ceil(filter_hours_used / 24)
+      div.querySelector('.var-led').textContent = led
     }
 
     /**********************弹窗信息************************/
