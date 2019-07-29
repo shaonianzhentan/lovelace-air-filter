@@ -7175,81 +7175,87 @@ class AirFilter extends HTMLElement {
     const attrs = state.attributes;
 
     if (!this.card) {
-      let root = this.createShadowRoot();
+      try {
 
-      const card = document.createElement('div');
-      card.className = 'air-filter'
 
-      // 创建背景效果
-      const container = getBg()
-      card.appendChild(container)
+        let root = this.createShadowRoot();
 
-      // 创建UI
-      const ui = getUI()
-      card.appendChild(ui)
-      // 定义事件
-      ui.querySelector('.var-state').onclick = () => {
-        log('开关')
-        hass.callService('fan', 'toggle', {
-          entity_id: entityId
-        });
-      }
-      ui.querySelector('.var-auto').onclick = () => {
-        log('自动')
-        hass.callService('fan', 'set_speed', {
-          entity_id: entityId,
-          speed: 'Auto'
-        });
-      }
-      ui.querySelector('.var-silent').onclick = () => {
-        log('睡眠')
-        hass.callService('fan', 'set_speed', {
-          entity_id: entityId,
-          speed: 'Silent'
-        });
-      }
-      ui.querySelector('.var-favorite').onclick = () => {
-        log('最爱')
-        hass.callService('fan', 'set_speed', {
-          entity_id: entityId,
-          speed: 'Favorite'
-        });
-      }
-      ui.querySelector('.var-title').onclick = () => {
-        log('最爱')
-        card.querySelector('.dialog').style.display = 'block'
-      }
+        const card = document.createElement('ha-card');
+        card.className = 'air-filter'
 
-      // 创建更多信息
-      const dialog = getDialog()
-      card.appendChild(dialog)
+        // 创建背景效果
+        const container = getBg()
+        card.appendChild(container)
 
-      dialog.querySelector('.dialog-close').onclick = () => {
-        dialog.style.display = 'none'
-      }
+        // 创建UI
+        const ui = getUI()
+        card.appendChild(ui)
+        // 定义事件
+        ui.querySelector('.var-state').onclick = () => {
+          log('开关')
+          hass.callService('fan', 'toggle', {
+            entity_id: entityId
+          });
+        }
+        ui.querySelector('.var-auto').onclick = () => {
+          log('自动')
+          hass.callService('fan', 'set_speed', {
+            entity_id: entityId,
+            speed: 'Auto'
+          });
+        }
+        ui.querySelector('.var-silent').onclick = () => {
+          log('睡眠')
+          hass.callService('fan', 'set_speed', {
+            entity_id: entityId,
+            speed: 'Silent'
+          });
+        }
+        ui.querySelector('.var-favorite').onclick = () => {
+          log('最爱')
+          hass.callService('fan', 'set_speed', {
+            entity_id: entityId,
+            speed: 'Favorite'
+          });
+        }
+        ui.querySelector('.var-title').onclick = () => {
+          log('最爱')
+          card.querySelector('.dialog').style.display = 'block'
+        }
 
-      // led点击
-      dialog.querySelector('.var-led').onclick = () => {
-        let ledState = attrs['led']
-        // 如果当前开就关
-        hass.callService('fan', ledState ? 'xiaomi_miio_set_led_off' : 'xiaomi_miio_set_led_on', {
-          entity_id: entityId
-        });
-        // 提示操作
-        hass.callService('persistent_notification', 'create', {
-          message: `${ledState ? '关闭' : '开启'}了${attrs['friendly_name']}的LED灯`,
-          title: `【${new Date().toLocaleTimeString()}】执行LED操作`
-        });
-      }
+        // 创建更多信息
+        const dialog = getDialog()
+        card.appendChild(dialog)
 
-      root.appendChild(card);
-      // 添加样式
-      let styleElement = document.createElement('style');
-      styleElement.innerHTML = `.air-filter{background:black;position: relative;height: 465px;overflow: hidden; width: 100%;}
+        dialog.querySelector('.dialog-close').onclick = () => {
+          dialog.style.display = 'none'
+        }
+
+        // led点击
+        dialog.querySelector('.var-led').onclick = () => {
+          let ledState = attrs['led']
+          // 如果当前开就关
+          hass.callService('fan', ledState ? 'xiaomi_miio_set_led_off' : 'xiaomi_miio_set_led_on', {
+            entity_id: entityId
+          });
+          // 提示操作
+          hass.callService('persistent_notification', 'create', {
+            message: `${ledState ? '关闭' : '开启'}了${attrs['friendly_name']}的LED灯`,
+            title: `【${new Date().toLocaleTimeString()}】执行LED操作`
+          });
+        }
+
+        root.appendChild(card);
+        // 添加样式
+        let styleElement = document.createElement('style');
+        styleElement.innerHTML = `.air-filter{background:black;position: relative;height: 463px;overflow: hidden; width: 100%;}
       ${style}`;
-      root.appendChild(styleElement);
+        root.appendChild(styleElement);
 
-      this.card = card;
+        this.card = card;
+      } catch (ex) {
+        alert(ex)
+      }
     }
 
     //设置值
