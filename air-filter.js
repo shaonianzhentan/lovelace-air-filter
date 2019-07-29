@@ -7120,7 +7120,7 @@ function setUI(div, { title, mode, aqi,
   div.className = 'dialog'
   div.innerHTML = `        
     <style>
-      .dialog{ height:100%; text-align:center; background:rgba(0,0,0,.8);position: absolute;top: 0;width: 100%;}
+      .dialog{ height:100%; display:none; text-align:center; background:rgba(0,0,0,.8);position: absolute;top: 0;width: 100%;}
       .dialog-panel{display: flex; flex-wrap: wrap;}
       .dialog-panel .dialog-attr{width:50%;box-sizing: border-box;border-right:1px solid #01be9e;border-bottom:1px solid #01be9e;padding:20px 0;}
       .dialog-panel .dialog-attr:nth-child(even){border-right:none;}
