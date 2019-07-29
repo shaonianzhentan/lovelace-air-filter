@@ -7178,7 +7178,7 @@ class AirFilter extends HTMLElement {
       try {
 
 
-        let root = this.attachShadow({ mode:'open' });
+        let root = this.attachShadow({ mode:'closed' });
 
         const card = document.createElement('ha-card');
         card.className = 'air-filter'
