@@ -7176,7 +7176,7 @@ class AirFilter extends HTMLElement {
 
     if (!this.card) {
 
-      let root = this.attachShadow({ mode: 'closed' });
+      //let root = this.attachShadow({ mode: 'closed' });
 
       const card = document.createElement('ha-card');
       card.className = 'air-filter'
@@ -7245,15 +7245,15 @@ class AirFilter extends HTMLElement {
         });
       }
 
-      root.appendChild(card);
       // 添加样式
       let styleElement = document.createElement('style');
       styleElement.innerHTML = `.air-filter{background:black;position: relative;height: 463px;overflow: hidden; width: 100%;}
       ${style}`;
-      root.appendChild(styleElement);
+      card.appendChild(styleElement);
 
       this.card = card;
-
+      
+      this.appendChild(card);
     }
 
     //设置值
