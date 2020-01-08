@@ -280,11 +280,11 @@ class AirFilter extends HTMLElement {
       ls.remove('off')
       ls.add('on')
       $('.footer div:nth-child(1) p').textContent = '关闭'
+      this.duang()
     } else if (state === 'off' && ls.contains('on')) {
       ls.remove('on')
       ls.add('off')
       $('.footer div:nth-child(1) p').textContent = '开启'
-      this.duang()
     }
     $('.title').textContent = title
     // 温湿度
