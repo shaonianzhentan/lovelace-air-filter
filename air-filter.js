@@ -10,6 +10,7 @@ class AirFilter extends HTMLElement {
     const div = document.createElement('ha-card');
     div.className = 'ha-air-filter-panel off'
     div.innerHTML = `
+            
             <div class="card-header">
                 <a class="name">
                     <ha-icon icon="mdi:air-filter"></ha-icon> 
@@ -17,6 +18,7 @@ class AirFilter extends HTMLElement {
                 </a>
                 <paper-icon-button icon="mdi:menu" style="margin-top:-8px;"></paper-icon-button> 
             </div>
+            <div class="duang">
             <div class="body">
                 <div class="content">
                   <p>PM2.5(μg/m³)</p>
@@ -28,6 +30,7 @@ class AirFilter extends HTMLElement {
                   <div></div>
                   <div></div>
                 </div>
+            </div>
             </div>
             <div class="tmp-body">
                 <div>
@@ -64,7 +67,7 @@ class AirFilter extends HTMLElement {
     shadow.appendChild(div)
 
     const style = document.createElement('style')
-    style.textContent = `            
+    style.textContent = `.ha-air-filter-panel{overflow:hidden;}            
             .card-header{display:flex;justify-content: space-between;}
             .card-header .name{cursor: pointer;text-decoration: none;}
                         
@@ -99,9 +102,7 @@ class AirFilter extends HTMLElement {
               to {transform: rotate(240deg);}
             }
            
-           .content{width:290px;height:290px;position:absolute;border-radius: 50%;margin-top:10px;z-index:1;
-              text-align: center;
-            }
+            .content{width:290px;height:290px;position:absolute;border-radius: 50%;margin-top:10px;z-index:1;text-align: center;}
             .content p{padding:0;margin:0;}
             .content p:nth-child(1){padding-top: 70px;font-size:12px;color:#ddd;}
             .content p:nth-child(2){font-size:80px;color:white;}
@@ -119,7 +120,6 @@ class AirFilter extends HTMLElement {
             .footer div ha-icon{font-size:25px;cursor:pointer;}
             .footer div span{display:inline-block;border:1px solid silver;padding:10px;border-radius:50%;text-align:center;}            
             .footer div p{color:gray;}
-
 
             /**开机**/
             .on .content-bg div{background: rgba(1,182,165,.1);}
@@ -143,12 +143,11 @@ class AirFilter extends HTMLElement {
             .off .content{background:#607d8b;}
             .off .footer div{color:gray!important;}
             .off .footer .status span{background:#01b6a5;color:white;}
-            .off .footer .status p{color:#222;}            
+            .off .footer .status p{color:#222;}
         `
     shadow.appendChild(style);
 
     this.shadow = shadow
-
     const $ = this.shadow.querySelector.bind(this.shadow)
     this.$ = $
     // 开-关机
@@ -158,6 +157,7 @@ class AirFilter extends HTMLElement {
         ls.remove('off')
         ls.add('on')
         this.toast('开启设备')
+        this.duang()
       } else {
         ls.remove('on')
         ls.add('off')
@@ -172,10 +172,62 @@ class AirFilter extends HTMLElement {
     // 最爱
     $('.footer div:nth-child(4) span').onclick = this.set_speed.bind(this, 'Favorite')
     // 更多
-    $('.card-header paper-icon-button').onclick = ()=>{
-        const entityId = this.config.entity;
-        this.fire('hass-more-info', { entityId })
+    $('.card-header paper-icon-button').onclick = () => {
+      const entityId = this.config.entity;
+      this.fire('hass-more-info', { entityId })
     }
+  }
+
+  // 特效
+  duang() {
+    const { $ } = this
+    if($('.duang .lizi')) return;
+    let arr = []
+    let f = document.createDocumentFragment()
+    // 左边
+    for (let i = 0; i < 20; i++) {
+      let s = Math.round(Math.random() * 5) + 5
+      let y = Math.round(Math.random() * 300)
+      let kf = `dust-y${y}`
+      let span = document.createElement('span')
+      span.className='lizi'
+      span.style.cssText = `animation: ${kf} ${s}s linear 1s infinite;left:-5px; margin-top:${y}px;`
+
+      if (!arr.includes(kf)) {
+        arr.push(`@keyframes ${kf}{from {left:0; margin-top:${y}px;}to {left:50%; margin-top:200px;}}`)
+      }
+      f.appendChild(span)
+    }
+    // 右边
+    for (let i = 0; i < 20; i++) {
+      let s = Math.round(Math.random() * 5) + 5
+      let y = Math.round(Math.random() * 300)
+      let kf = `dust-x${y}`
+      let span = document.createElement('span')
+      span.className='lizi'
+
+      span.style.cssText = `animation: ${kf} ${s}s linear 1s infinite;right:-5px; margin-top:${y}px;`
+      if (!arr.includes(kf)) {
+        arr.push(`@keyframes ${kf}{from {right:0; margin-top:${y}px;}to {right:50%; margin-top:200px;}}`)
+      }
+      
+      f.appendChild(span)
+    }
+    // 样式
+    let style = document.createElement('style')
+    style.textContent = `
+      /**灰尘**/
+      .duang{position: relative;overflow:hidden;padding-bottom:10px;}
+      .duang .lizi{
+        display:block;
+        width:3px;height:3px;
+        border-radius:50%;
+        background-color: #01b6a5;
+        position: absolute;
+      }
+      ${arr.join('')}`
+    f.appendChild(style)
+    $('.duang').insertBefore(f, $('.body'))
   }
 
   // 设置速度
@@ -188,17 +240,17 @@ class AirFilter extends HTMLElement {
   toast(message) {
     this.fire("hass-notification", { message })
   }
-  
-    // 触发事件
-    fire(type, data) {
-        const event = new Event(type, {
-            bubbles: true,
-            cancelable: false,
-            composed: true
-        });
-        event.detail = data;
-        document.querySelector('home-assistant').dispatchEvent(event);
-    }
+
+  // 触发事件
+  fire(type, data) {
+    const event = new Event(type, {
+      bubbles: true,
+      cancelable: false,
+      composed: true
+    });
+    event.detail = data;
+    document.querySelector('home-assistant').dispatchEvent(event);
+  }
 
   // 服务
   call(name, data = {}) {
@@ -232,6 +284,7 @@ class AirFilter extends HTMLElement {
       ls.remove('on')
       ls.add('off')
       $('.footer div:nth-child(1) p').textContent = '开启'
+      this.duang()
     }
     $('.title').textContent = title
     // 温湿度
@@ -240,7 +293,7 @@ class AirFilter extends HTMLElement {
 
     // 质量
     let qls = $('.content').classList
-    qls.remove('level-1','level-2','level-3','level-4','level-5','level-6')
+    qls.remove('level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6')
     let quality = '优'
     if (aqi < 50) {
       quality = '优'
