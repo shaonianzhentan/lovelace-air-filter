@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      body{margin-left:100px;padding:0;}
-    </style>
-  </head>
-  <body>
-    <air-filter />
-    <script src="air-filter.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://unpkg.com/@mdi/font@4.7.95/css/materialdesignicons.min.css">
+  <style>
+    body {
+      margin-left: 100px;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="ha-icon.js"></script>
+  <div style="width:500px;box-shadow: 0 0 10px silver;border-radius: 10px;">
+    <air-filter />  
+  </div>  
+  <script src="air-filter.js"></script>
+  <script>
+      document.querySelector('air-filter').update({
+        title: '空气净化器',
+        mode: 'auto',
+        aqi: 100,
+        filter_life_remaining: 11,
+        temperature: 10,
+        humidity: 30,
+        state:'on'
+      })
+  </script>
+</body>
+
 </html>
