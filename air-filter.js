@@ -105,7 +105,7 @@ class AirFilter extends HTMLElement {
             .content{width:290px;height:290px;position:absolute;border-radius: 50%;margin-top:10px;z-index:1;text-align: center;}
             .content p{padding:0;margin:0;}
             .content p:nth-child(1){padding-top: 70px;font-size:12px;color:#ddd;}
-            .content p:nth-child(2){font-size:80px;color:white;}
+            .content p:nth-child(2){font-size:80px;color:white;margin: 40px 0;}
             .content p:nth-child(3){color:#eee;}
 
             .body{width: 300px;margin: 0 auto;}
